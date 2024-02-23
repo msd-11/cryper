@@ -92,7 +92,7 @@ const Game: React.FC = () => {
         setApi={setApi}
         opts={{ watchDrag: false, slidesToScroll: 1, align: 'start' }}
       >
-        <CarouselContent>
+        <CarouselContent className="m-0">
           {data.map((value, index) => (
             <CarouselItem
               key={index}
