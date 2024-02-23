@@ -1,0 +1,1 @@
+export const RIDDLE_API_KEY = process.env.VITE_RIDDLE_API_KEY as string;
