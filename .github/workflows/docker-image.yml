@@ -2,9 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - master
-      - '*'
+    branches: ['master', 'feat/**']
 
 jobs: 
   test:
