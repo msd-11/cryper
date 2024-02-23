@@ -71,7 +71,7 @@ const Game: React.FC = () => {
             <p>Solve this riddle to continue :</p>
             <p className="mt-4">Riddle...</p>
             <input
-              className="border bg-white mt-4 p-2 rounded-2xl"
+              className="border bg-white text-black mt-4 p-2 rounded-2xl"
               placeholder="Response..."
             ></input>
             <button className="ml-4 bg-yellow-500 px-4 py-2 rounded-2xl">
