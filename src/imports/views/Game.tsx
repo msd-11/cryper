@@ -85,7 +85,7 @@ const Game: React.FC = () => {
         false
       )}
       <div className="absolute left-0 right-0 top-0 bottom-0 m-auto w-28 h-28 bg-[#181A1B] z-10 rounded-[50%] flex justify-center items-center">
-        <p className="text-[3vh] font-[RooneySansRegular]">VS</p>
+        <p className="text-[3vh] text-white font-[RooneySansRegular]">VS</p>
       </div>
       <Carousel
         className="m-0"
@@ -94,54 +94,53 @@ const Game: React.FC = () => {
       >
         <CarouselContent>
           {data.map((value, index) => (
-            <CarouselItem className="relative basis-1/2 bg-transparent border border-black m-0">
-              {current == index ? (
-                <div className="absolute left-0 right-0 top-0 bottom-0 m-auto w-fit h-fit z-10 text-center">
-                  <p className="text-[6vh] font-[RooneySansRegular]">
-                    “{value.name}”
-                  </p>
-                  <p className="text-xl font-[RooneySansRegular]">has</p>
-                  <p className="text-[6vh] text-[#FFF879] font-[RooneySansRegular]">
-                    {value.price}
-                  </p>
-                  <p className="text-xl font-[RooneySansRegular]">value</p>
-                </div>
-              ) : (
-                <div className="absolute left-0 right-0 top-0 bottom-0 m-auto w-fit h-fit z-10 text-center">
-                  <p className="text-[6vh] font-[RooneySansRegular]">
-                    “{value.name}”
-                  </p>
-                  <p className="text-xl font-[RooneySansRegular]">has</p>
-                  <div className="flex flex-col gap-4 mt-4">
-                    <button className="border p-3 rounded-[2rem] text-[#FFF879] hover:bg-[#181A1B] hover:text-white">
-                      <p
-                        onClick={handleClickHigher}
-                        className="text-extrabold text-xl text-[#FFF879] font-[RooneySansRegular]"
-                      >
-                        Higher
-                      </p>
-                    </button>
-
-                    <button className="border p-3 rounded-[2rem] text-[#FFF879] hover:bg-[#181A1B] hover:text-white">
-                      <p
-                        onClick={handleClickLower}
-                        className="text-extrabold text-xl text-[#FFF879] font-[RooneySansRegular]"
-                      >
-                        Lower
-                      </p>
-                    </button>
-
+            <CarouselItem
+              key={index}
+              className="relative basis-1/2 text-black h-screen bg-no-repeat bg-center bg-white border border-black"
+              style={{
+                backgroundImage: `url(${value.imageUrl})`,
+                backgroundSize: '50%',
+              }}
+            >
+              <div className="h-full flex flex-col items-center justify-center bg-black/50 text-white">
+                {current == index ? (
+                  <>
+                    <p className="text-[6vh] font-[RooneySansRegular]">
+                      “{value.name}”
+                    </p>
+                    <p className="text-xl font-[RooneySansRegular]">has</p>
+                    <p className="text-[6vh] text-[#FFF879] font-[RooneySansRegular]">
+                      {value.price} €
+                    </p>
                     <p className="text-xl font-[RooneySansRegular]">value</p>
-                  </div>
-                </div>
-              )}
+                  </>
+                ) : (
+                  <>
+                    <p className="text-[6vh] font-[RooneySansRegular]">
+                      “{value.name}”
+                    </p>
+                    <p className="text-xl font-[RooneySansRegular]">is</p>
+                    <div className="flex flex-col gap-4 mt-4">
+                      <button
+                        onClick={handleClickHigher}
+                        className="border py-3 px-16 rounded-[2rem] text-[#FFF879] bg-black/60 hover:bg-[#181A1B] hover:text-white"
+                      >
+                        <p className="text-extrabold text-xl text-[#FFF879] font-[RooneySansRegular]">
+                          Higher
+                        </p>
+                      </button>
 
-              <div
-                className={
-                  'h-screen w-[150%] text-white brightness-50 bg-no-repeat bg-contain bg-center'
-                }
-              >
-                <img src={value.imageUrl} className="h-screen bg-white" />
+                      <button
+                        onClick={handleClickLower}
+                        className="border py-3 px-16 rounded-[2rem] text-[#FFF879] bg-black/60 hover:bg-[#181A1B] hover:text-white"
+                      >
+                        <p className="text-extrabold text-xl text-[#FFF879] font-[RooneySansRegular]">
+                          Lower
+                        </p>
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             </CarouselItem>
           ))}
