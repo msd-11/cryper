@@ -25,3 +25,6 @@ dist-ssr
 
 # Code coverage
 coverage/
+
+.env
+.env.*

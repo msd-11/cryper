@@ -4,6 +4,9 @@ on:
   push:
     branches: ['master', 'feat/**']
 
+env:
+  VITE_RIDDLE_API_KEY: ${{ secrets.RIDDLE_API_KEY }}
+
 jobs: 
   test:
     runs-on: ubuntu-latest
