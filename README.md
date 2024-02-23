@@ -11,7 +11,7 @@ Currently, two official plugins are available:
 
 ```
 docker build -t msd-11/cryper .
-docker run --rm -d -p 5173:5173 msd-11/cryper
+docker run --rm -d -p 80:80 msd-11/cryper
 ```
 
 ## Expanding the ESLint configuration
