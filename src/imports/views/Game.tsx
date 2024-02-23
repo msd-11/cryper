@@ -3,15 +3,10 @@ import {
   CarouselApi,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
-import { useState, useEffect } from "react";
-
-const data = [
-  { name: "Bitcoin", value: 1255.0 },
-  { name: "Etherum", value: 121 },
-  { name: "Nano", value: 255 },
-  { name: "azeaz", value: 255 },
-];
+} from '@/components/ui/carousel';
+import { useState, useEffect } from 'react';
+import CoinGeckoApi from '../api/CoinGeckoApi';
+import Coin from '../api/Coin';
 
 const Game: React.FC = () => {
   const [api, setApi] = useState<CarouselApi>();
@@ -19,40 +14,50 @@ const Game: React.FC = () => {
   const [current, setCurrent] = useState(0);
   const [lost, setLost] = useState(false);
   const [score, setScore] = useState(0);
+  const [data, setData] = useState<Coin[]>([]);
 
   useEffect(() => {
     if (!api) {
       return;
     }
 
+    CoinGeckoApi.getTopCoins()
+      .then((res) => {
+        console.log(res);
+        setData(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     setCurrent(api.selectedScrollSnap());
 
-    api.on("select", () => {
-      console.log("log");
+    api.on('select', () => {
+      console.log('log');
     });
   }, [api]);
 
   const handleClickHigher = () => {
-    console.log(data[current].value, data[current + 1].value);
-    if (data[current].value <= data[current + 1].value) {
+    console.log(data[current].price, data[current + 1].price);
+    if (data[current].price <= data[current + 1].price) {
       setScore(score + 1);
       api?.scrollNext();
       setCurrent(current + 1);
     } else {
       setLost(true);
-      console.log("PERDU");
+      console.log('PERDU');
     }
   };
 
   const handleClickLower = () => {
-    console.log(data[current].value, data[current + 1].value);
-    if (data[current].value >= data[current + 1].value) {
+    console.log(data[current].price, data[current + 1].price);
+    if (data[current].price >= data[current + 1].price) {
       setScore(score + 1);
       api?.scrollNext();
       setCurrent(current + 1);
     } else {
       setLost(true);
-      console.log("PERDU");
+      console.log('PERDU');
     }
   };
 
@@ -83,12 +88,13 @@ const Game: React.FC = () => {
         <p className="text-[3vh] font-[RooneySansRegular]">VS</p>
       </div>
       <Carousel
+        className="m-0"
         setApi={setApi}
-        opts={{ watchDrag: false, slidesToScroll: 1, align: "start" }}
+        opts={{ watchDrag: false, slidesToScroll: 1, align: 'start' }}
       >
         <CarouselContent>
           {data.map((value, index) => (
-            <CarouselItem className="relative basis-1/2 bg-white m-0">
+            <CarouselItem className="relative basis-1/2 bg-transparent border border-black m-0">
               {current == index ? (
                 <div className="absolute left-0 right-0 top-0 bottom-0 m-auto w-fit h-fit z-10 text-center">
                   <p className="text-[6vh] font-[RooneySansRegular]">
@@ -96,7 +102,7 @@ const Game: React.FC = () => {
                   </p>
                   <p className="text-xl font-[RooneySansRegular]">has</p>
                   <p className="text-[6vh] text-[#FFF879] font-[RooneySansRegular]">
-                    {value.value}
+                    {value.price}
                   </p>
                   <p className="text-xl font-[RooneySansRegular]">value</p>
                 </div>
@@ -110,7 +116,7 @@ const Game: React.FC = () => {
                     <button className="border p-3 rounded-[2rem] text-[#FFF879] hover:bg-[#181A1B] hover:text-white">
                       <p
                         onClick={handleClickHigher}
-                        className="text-extrabold text-xl font-[RooneySansRegular]"
+                        className="text-extrabold text-xl text-[#FFF879] font-[RooneySansRegular]"
                       >
                         Higher
                       </p>
@@ -119,7 +125,7 @@ const Game: React.FC = () => {
                     <button className="border p-3 rounded-[2rem] text-[#FFF879] hover:bg-[#181A1B] hover:text-white">
                       <p
                         onClick={handleClickLower}
-                        className="text-extrabold text-xl font-[RooneySansRegular]"
+                        className="text-extrabold text-xl text-[#FFF879] font-[RooneySansRegular]"
                       >
                         Lower
                       </p>
@@ -130,7 +136,13 @@ const Game: React.FC = () => {
                 </div>
               )}
 
-              <div className="h-screen w-[150%] text-white bg-[url('https://assets.coingecko.com/coins/images/1/large/bitcoin.png')] brightness-75 bg-no-repeat bg-cover bg-center blur-xl"></div>
+              <div
+                className={
+                  'h-screen w-[150%] text-white brightness-50 bg-no-repeat bg-contain bg-center'
+                }
+              >
+                <img src={value.imageUrl} className="h-screen bg-white" />
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>
