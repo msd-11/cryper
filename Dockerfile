@@ -1,4 +1,6 @@
 FROM node:18-alpine AS builder
+ARG VITE_RIDDLE_API_KEY
+ENV VITE_RIDDLE_API_KEY=$VITE_RIDDLE_API_KEY
 WORKDIR /opt
 COPY . .
 RUN npm install
