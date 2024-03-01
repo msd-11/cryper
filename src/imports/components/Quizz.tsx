@@ -7,9 +7,7 @@ interface QuizzI {
 }
 
 const Quiz: React.FC<QuizzI> = ({ callback }) => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [score, setScore] = useState(0);
+  const [selectedOption, setSelectedOption] = useState<string>('');
   const [isCorrect, setIsCorrect] = useState(true);
   const [questions, setQuestions] = useState<Riddle>();
 
@@ -37,7 +35,7 @@ const Quiz: React.FC<QuizzI> = ({ callback }) => {
     }
   };
 
-  const handleOptionSelect = (option) => {
+  const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
   };
 
