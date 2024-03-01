@@ -1,19 +1,19 @@
 # Cryper
 
-> L'api CoinGecko que nous utilisons est rate limité à 30 requêtes par minute. Cela semble beaucoup mais on atteint très rapidement cette limite lors de l'exécution de l'application.
+> L'api CoinGecko que nous utilisons est rate limité à ~30 requêtes par minute. Cela semble beaucoup mais on atteint très rapidement cette limite lors de l'exécution de l'application et de ces tests.
 
 ![Image du jeu](/docs/game_screenshot_1.png 'Image du jeu')
 
 ## Exécution
 
-Pour exécuter le projet, il suffit de lancer le conteneur Docker en indiquant le nom publié sur [Docker HUB](hub.docker.com) avec la commande suivante :  
+Pour exécuter le projet, il suffit de lancer le conteneur Docker en indiquant le nom publié sur [Docker HUB](https://hub.docker.com/r/dockershowgirl576/cryper) avec la commande suivante :  
 `docker run -d -p 8080:80 dockershowgirl576/cryper:latest`
 
 Le port 8080 est à changer à votre guise.
 
 ## Build
 
-Il est également possible de build le Docker pour obtenir une image local.
+Il est également possible de build le Docker pour obtenir une image locale.
 
 ```
 docker build -t dockershowgirl576/cryper .
@@ -28,7 +28,7 @@ Pour lancer l'exécution des tests il suffit de lancer la commande suivante :
 
 `npm run test`
 
-Voici le résultat de la commande :
+Voici le résultat obtenu :
 
 ```
 
