@@ -49,7 +49,7 @@ jobs:
         node-version: '18'
 
     - name: Build Docker image
-      run: docker build --build-arg VITE_RIDDLE_API_KEY=${{ secrets.RIDDLE_API_KEY }} -t ${{ secrets.DOCKER_USERNAME }}/cryper:${TAG} .
+      run: docker build --build-arg VITE_RIDDLE_API_KEY=${{ secrets.RIDDLE_API_KEY }} -t ${{ secrets.DOCKER_USERNAME }}/cryper:${TAG} -t ${{ secrets.DOCKER_USERNAME }}/cryper:latest .
 
     - name: Login to DockerHub
       uses: docker/login-action@v1
@@ -58,4 +58,4 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
 
     - name: Publish Docker
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/cryper:${TAG}
+      run: docker push -a ${{ secrets.DOCKER_USERNAME }}/cryper
