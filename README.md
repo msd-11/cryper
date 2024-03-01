@@ -1,37 +1,28 @@
-# React + TypeScript + Vite
+# Cryper
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> L'api CoinGecko que nous utilisons est rate limité à 30 requêtes par minute. Cela semble beaucoup mais on atteint très rapidement cette limite lors de l'exécution de l'application.
 
-Currently, two official plugins are available:
+## Exécution
 
--   [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
--   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Pour exécuter le projet, il suffit d'exécuter le conteneur Docker avec la commande suivante :  
+`docker run -d -p 8080:80 dockershowgirl576/cryper:latest`
 
-## Docker
+Le port 8080 est à changer à votre guise.
 
-```
-docker build -t msd-11/cryper .
-docker run --rm -d -p 80:80 msd-11/cryper
-```
+## Fonctionalités
 
-## Expanding the ESLint configuration
+### Récupération des cryptomonnaies via API
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+À partir de l'api de CoinGecko, nous récupérons les 500 premières coins que nous mélangeons aléatoirement en effectuant deux requêtes.
 
--   Configure the top-level `parserOptions` property like this:
+### Récupération des énigmes via API
 
-```js
-export default {
-    // other rules...
-    parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        project: ['./tsconfig.json', './tsconfig.node.json'],
-        tsconfigRootDir: __dirname,
-    },
-};
-```
+À partir de l'api de "api-ninjas", nous récupérons une énigme. Lorsque l'utilisateur perd sa partie, il a la possibilité de regagner une vie en répondant correctement à une énigme.
 
--   Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
--   Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
--   Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Logique du jeu et interface
+
+Le jeu est un "plus ou moins" avec à gauche une valeur de crypto connue, et à droite, deux boutons, plus ou moins, pour deviner si la crypto à droite est supérieure ou inférieure à celle de gauche.  
+Lorsque le joueur se trompe, une pop-up lui propose de répondre à une énigme comme présenté ci-dessus.
+
+![Image du jeu](/docs/game_screenshot_1.png 'Image du jeu')  
+![Image du jeu 2](/docs/game_screenshot_2.png 'Image du jeu 2')
