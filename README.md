@@ -4,12 +4,21 @@
 
 ## Exécution
 
-Pour exécuter le projet, il suffit d'exécuter le conteneur Docker avec la commande suivante :  
+Pour exécuter le projet, il suffit de lancer le conteneur Docker en indiquant le nom publié sur [Docker HUB](hub.docker.com) avec la commande suivante :  
 `docker run -d -p 8080:80 dockershowgirl576/cryper:latest`
 
 Le port 8080 est à changer à votre guise.
 
-## Fonctionalités
+## Build
+
+Il est également possible de build le Docker pour obtenir une image local.
+
+```
+docker build -t dockershowgirl576/cryper .
+docker run --rm -d -p 80:80 dockershowgirl576/cryper
+```
+
+## Fonctionalitées
 
 ### Récupération des cryptomonnaies via API
 
